@@ -1,0 +1,158 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content %}
+            <main class="main-content" id="main-content">
+                <div class="filtration-panel">
+                    <div class="panel-title">
+                        Фильтрация
+                    </div>
+                    <div class="filtraition-content">
+                        <div class="filtration-input">
+                            <p>По цене</p>
+                            <input type="text">
+                        </div>
+                        <div class="filtration-input">
+                            <p>По названию</p>
+                            <input type="text">
+                        </div>
+                        <div class="filtration-input">
+                            <p>Производитель</p>
+                            <input type="text">
+                        </div>
+                        <div class="filtration-button-con">
+                            <button class="filtration-bt">Фильтровать</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-container">
+                    <div class="container-title">
+                        Товары
+                    </div>
+
+
+
+                    <div class="table-labels">
+                        <div class="tabel-label">№</div>
+                        <div class="tabel-label">Название</div>
+                        <div class="tabel-label">Материал</div>
+                        <div class="tabel-label">Цена</div>
+                        <div class="tabel-label">Количество</div>
+                        <div class="tabel-label">Производитель</div>
+                        <div class="tabel-label">Действия</div>
+                    </div>
+
+                    {% for product in products %}
+                    <div class="product">
+                        <div class="prod-num">{{ product.id }}</div>
+                        <div class="prod-title">{{ product.title }}</div>
+                        <div class="prod-material">{{ product.material }}</div>
+                        <div class="prod-price">{{ product.price }} руб.</div>
+                        <div class="prod-quantity">{{ product.count }} шт.</div>
+                        <div class="prod-produced-by">{{ product.produced }}</div>
+                        <div class="prod-actions">
+                            <a href="/update_product/{{product.id}}"><button type="button">Изменить</button></a>
+                            <!-- <button type="button" onclick="updateProduct({{ product.id }})">Изменить</button> -->
+                            <button type="button" onclick="deleteProduct({{ product.id }})">Удалить</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </main>
+            <div class="add-product-wrapper" id="menu">
+                <div class="add-prod-form-container">
+                    <a><button id="form-close" onclick="closeForm()">X</button></a>
+                    <h2 id="form-title">Добавить товар</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button id="save-bt" type="submit">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+    <script>
+        function updateProduct(productId) {
+            var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+            // В данном примере передаем только ID продукта для изменения
+            $.ajax({
+                url: `/update_product/${productId}/`,
+                type: 'POST',
+                data: {
+                    csrfmiddlewaretoken: csrfToken,
+                    // Другие данные, если необходимо
+                },
+                success: function (response) {
+                    alert(response.message);
+                    location.reload();
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert('Ошибка при изменении продукта');
+                }
+            });
+        }
+
+        function deleteProduct(productId) {
+            var csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]');
+            if (csrfToken) {
+                csrfToken = csrfToken.value;
+                if (confirm('Вы уверены, что хотите удалить продукт?')) {
+                    $.ajax({
+                        url: `/delete_product/${productId}/`,
+                        type: 'POST',
+                        data: {
+                            csrfmiddlewaretoken: csrfToken,
+                        },
+                        success: function (response) {
+                            alert(response.message);
+                            location.reload();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            alert('Ошибка при удалении продукта');
+                        }
+                    });
+                }
+            } else {
+                alert('CSRF токен не найден.');
+            }
+        }
+
+        function openForm() {
+            let menu = document.getElementById("menu");
+            let main_con = document.getElementById("main-content");
+            menu.classList.add("show");
+            main_con.classList.add("hidden");
+        }
+
+        function closeForm() {
+            let menu = document.getElementById("menu");
+            let main_con = document.getElementById("main-content");
+            menu.classList.remove("show");
+            main_con.classList.remove("hidden");
+
+        }
+
+        var currentUrl = window.location.href;
+
+
+        if (currentUrl.includes('/update_product/')) {
+            openForm();
+            let form_title = document.getElementById("form-title");
+            form_title.textContent = "Изменить товар";
+            let form_close = document.getElementById("form-close");
+            form_close.parentElement.href = "/";
+        }
+
+
+    </script>
+
+</body>
+
+</html>

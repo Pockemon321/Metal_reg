@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+    <link rel="stylesheet" href="{% static 'app/css/index.css' %}">
+
+    <link rel="stylesheet" href="{% static 'app/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/left-menu.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100;400;700&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <div class="left-menu-container">
+            <div class="logo-container">
+                <div class="logo-title">
+                    metaloprokat.ru
+                </div>
+                <div class="logo-img-container">
+                    <img class="logo-img" src="{% static 'app/img/logo.png' %}" title="logo" alt="logo-img">
+                </div>
+            </div>
+            <div class="navigation-con">
+                <nav>
+                    <ul>
+                        <li class="nav-title">Навигация</li>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/about">О компании</a></li>
+                        <li><a href="/delivery">Доставка и оплата</a></li>
+                        <li><a href="/login">Войти/</a></li> <li><a href="/register">Регестрироваться</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="add-product-button-container">
+                <button class="add-prod-bt" onclick="openForm()">
+                    <span class="material-symbols-outlined">
+                        add_circle
+                    </span> Добавить товар
+                </button>
+
+            </div>
+        </div>
+
+        <div class="main-content-container">
+            <header>
+                Главная
+            </header>
+            {% block content %} {% endblock%}
+</body>
+
+</html>

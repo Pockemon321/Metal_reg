@@ -1,0 +1,145 @@
+.main-content-container {}
+.main-wrapper{
+    position: relative;
+}
+header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #ECECEC;
+    width: 82vw;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-left: 25px;
+}
+
+.main-content {
+    width: 82vw;
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    padding-left: 25px;
+    margin-top: 43px;
+}
+
+.filtration-panel {
+    width: 82vw;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.filtraition-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.filtration-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+}
+
+.filtration-input input {
+    width: 150px;
+    height: 10px;
+}
+
+.products-container {}
+
+.container-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+.table-labels {
+    display: flex;
+    column-gap: 50px;
+    margin-bottom: 20px;
+
+}
+
+.tabel-label {
+    width: 100px;
+}
+
+.product {
+    display: flex;
+    column-gap: 50px;
+    margin-bottom: 20px;
+}
+
+.product div {
+    width: 100px;
+}
+
+.prod-num {}
+
+.prod-title {}
+
+.prod-material {}
+
+.prod-price {}
+
+.prod-produced-by {}
+
+.prod-actions {}
+
+/* .add-product-wrapper {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+} */
+.add-product-wrapper{
+    display: none;
+}
+.add-prod-form-container {
+    background-color: white; 
+}
+
+.add-prod-form-container form{
+    width: 82vw;
+    display: grid;
+    grid-template-rows: 2; /* You can adjust the row sizes as needed */
+    grid-template-columns: repeat(2, 250px); /* Creates three columns with equal width */
+    padding-left: 25px;
+    margin-top: 43px;
+    position: relative;
+}
+
+.add-prod-form-container p{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-prod-form-container #save-bt{
+    width: 100px;
+    height: 50px;
+    position: absolute;
+    top: 219px;
+    left: 24px;
+}
+
+.show{
+    display: flex;
+}
+
+.hidden{
+    display: none;
+}
